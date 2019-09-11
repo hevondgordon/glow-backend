@@ -1,0 +1,13 @@
+
+type Post {
+    created: AWSDateTime!
+    image: String!
+    caption: String!
+}
+type Query {
+    getPost: Post
+}
+
+schema {
+    query: Query
+}

@@ -1,0 +1,21 @@
+service: glow-app-${opt:stage, 'dev'}
+
+plugins:
+  - serverless-appsync-plugin
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+
+custom:
+  accountId: 293458897566
+  appSync:
+    name: glow-app-${opt:stage, 'dev'}
+    serviceRole: "AppSyncServiceRole" 
+    userPoolConfig:
+      awsRegion: 'us-east-1'
+      defaultAction: ALLOW
+      userPoolId: 'us-east-1_AHwkMYjFA'
+    authenticationType: 'AMAZON_COGNITO_USER_POOLS'
