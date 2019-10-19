@@ -1,0 +1,128 @@
+{
+  "service": {
+    "service": "glow-app-dev",
+    "serviceObject": {
+      "name": "glow-app-dev"
+    },
+    "provider": {
+      "stage": "dev",
+      "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*]+?)}",
+      "name": "aws",
+      "runtime": "nodejs8.10",
+      "region": "us-east-1",
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "GraphQlApi": {
+            "Type": "AWS::AppSync::GraphQLApi",
+            "Properties": {
+              "Name": "glow-app-dev",
+              "AuthenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "AdditionalAuthenticationProviders": [],
+              "UserPoolConfig": {
+                "AwsRegion": "us-east-1",
+                "UserPoolId": "us-east-1_AHwkMYjFA",
+                "DefaultAction": "ALLOW"
+              }
+            }
+          },
+          "GraphQlSchema": {
+            "Type": "AWS::AppSync::GraphQLSchema",
+            "Properties": {
+              "Definition": "\ntype Post {\n    created: AWSDateTime!\n    image: String!\n    caption: String!\n}\ntype Query {\n    getPost: Post\n}\n\nschema {\n    query: Query\n}",
+              "ApiId": {
+                "Fn::GetAtt": [
+                  "GraphQlApi",
+                  "ApiId"
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          },
+          "GraphQlApiUrl": {
+            "Value": {
+              "Fn::GetAtt": [
+                "GraphQlApi",
+                "GraphQLUrl"
+              ]
+            }
+          }
+        }
+      },
+      "coreCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      }
+    },
+    "custom": {
+      "accountId": 293458897566,
+      "appSync": {
+        "name": "glow-app-dev",
+        "serviceRole": "AppSyncServiceRole",
+        "userPoolConfig": {
+          "awsRegion": "us-east-1",
+          "defaultAction": "ALLOW",
+          "userPoolId": "us-east-1_AHwkMYjFA"
+        },
+        "authenticationType": "AMAZON_COGNITO_USER_POOLS"
+      }
+    },
+    "plugins": [
+      "serverless-appsync-plugin"
+    ],
+    "pluginsData": {},
+    "functions": {},
+    "serviceFilename": "serverless.yml",
+    "layers": {}
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/glow-app-dev/dev/1568241976817-2019-09-11T22:46:16.817Z",
+    "artifact": ""
+  }
+}

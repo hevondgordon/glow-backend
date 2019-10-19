@@ -6,3 +6,7 @@ export interface QueryWithFilterParams {
     ExpressionAttributeNames?: any;
     Limit?: number;
 }
+export interface CreateItemParams {
+    TableName: string;
+    Item: object;
+}

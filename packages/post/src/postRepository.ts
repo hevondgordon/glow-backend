@@ -1,5 +1,7 @@
-import {queryWithFilter, QueryWithFilterParams} from 'utils';
-import {GetPostsByCategoryInput} from './types';
+import {queryWithFilter, QueryWithFilterParams, CreateItemParams, createItem} from 'utils';
+import {GetPostsByCategoryInput, CreatePostInput } from './types';
+
+const uuidv1 = require('uuid/v1');
 const TABLE_NAME = 'Glow';
 
 export async function getPostsByCategoryHandler(params:
@@ -17,4 +19,24 @@ export async function getPostsByCategoryHandler(params:
 
   const posts = await queryWithFilter(queryWithFilterParams);
   return posts;
+}
+
+export async function createPostHandler(params: 
+  CreatePostInput) {
+  const createItemParams: CreateItemParams = {
+    TableName: TABLE_NAME,
+    Item: {
+      caption: params.caption,
+      category: params.category,
+      created: params.created,
+      createdBy: params.createdBy,
+      imageURL: params.imageURL,
+      isLiked: params.isLiked,
+      likeCount: params.likeCount,
+      usernameFilter: params.usernameFilter,
+      partitionKey: "post",
+      sortKey: uuidv1()
+    }
+  }
+  await createItem(createItemParams);
 }

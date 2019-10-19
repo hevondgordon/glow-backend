@@ -4,7 +4,7 @@ const DocumentClient = new DynamoDB.DocumentClient({
   region: process.env.REGION,
 });
 
-import {QueryWithFilterParams} from './types';
+import {QueryWithFilterParams, CreateItemParams} from './types';
 
 export async function queryWithFilter(query: QueryWithFilterParams):
 Promise<any[]> {
@@ -21,3 +21,16 @@ Promise<any[]> {
     });
   });
 };
+
+export async function createItem(query: CreateItemParams) {
+  const params = {
+    TableName: query.TableName,
+    Item: query.Item
+  }
+  return new Promise((resolve, reject) => {
+    DocumentClient.put(params, (err, data) => {
+      if (err) console.log(err)
+      err ? reject(err) : resolve(data);
+    });
+  });
+}

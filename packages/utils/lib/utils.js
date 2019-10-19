@@ -24,8 +24,6 @@ function queryWithFilter(query) {
         };
         return new Promise((resolve, reject) => {
             DocumentClient.query(params, (err, data) => {
-                console.log('data');
-                console.log(data);
                 err ? reject(err) : resolve(data.Items);
             });
         });
@@ -33,4 +31,20 @@ function queryWithFilter(query) {
 }
 exports.queryWithFilter = queryWithFilter;
 ;
+function createItem(query) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const params = {
+            TableName: query.TableName,
+            Item: query.Item
+        };
+        return new Promise((resolve, reject) => {
+            DocumentClient.put(params, (err, data) => {
+                if (err)
+                    console.log(err);
+                err ? reject(err) : resolve(data);
+            });
+        });
+    });
+}
+exports.createItem = createItem;
 //# sourceMappingURL=utils.js.map

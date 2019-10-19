@@ -1,28 +1,28 @@
-# AppSyncLambdaServiceRole:
-#   Type: "AWS::IAM::Role"
-#   Properties:
-#     RoleName: "glow-app-lambda-${opt:stage, 'dev'}"
-#     AssumeRolePolicyDocument:
-#       Version: "2012-10-17"
-#       Statement:
-#         -
-#           Effect: "Allow"
-#           Principal:
-#             Service:
-#               - "appsync.amazonaws.com"
-#           Action:
-#             - "sts:AssumeRole"
-#     Policies:
-#       -
-#         PolicyName: "glow-app-lambda-${opt:stage, 'dev'}-Policy"
-#         PolicyDocument:
-#           Version: "2012-10-17"
-#           Statement:
-#             -
-#               Effect: "Allow"
-#               Action:
-#                 - "lambda:invokeFunction"
-              # Resource:
+AppSyncLambdaServiceRole:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: "glow-app-lambda-${opt:stage, 'dev'}"
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Effect: "Allow"
+          Principal:
+            Service:
+              - "appsync.amazonaws.com"
+          Action:
+            - "sts:AssumeRole"
+    Policies:
+      -
+        PolicyName: "glow-app-lambda-${opt:stage, 'dev'}-Policy"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Action:
+                - "lambda:invokeFunction"
+              Resource:
               #   -
 Resources: 
   AppSyncDynamoDbServiceRole:
@@ -57,7 +57,7 @@ Resources:
                   - "dynamodb:UpdateItem"
                 Resource:
                   - "arn:aws:dynamodb:us-east-1:293458897566:table/Glow"
-
+                  - "arn:aws:lambda:us-east-1:293458897566:function:post-dev-createPost"
                   # - "arn:aws:dynamodb:${opt:region, 'us-east-1'}:*:table/Controls-${opt:stage, 'dev'}"
                   # - "arn:aws:dynamodb:${opt:region, 'us-east-1'}:*:table/Controls-${opt:stage, 'dev'}/*"
                   # - "arn:aws:dynamodb:${opt:region, 'us-east-1'}:*:table/mapCompanyNameToId-${opt:stage, 'dev'}"

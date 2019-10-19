@@ -12,8 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const postRepository_1 = require("./postRepository");
 function getPostsByCategory(event, context, callback) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('event');
-        console.log(event);
         const getPostsByCategoryInput = {
             category: event.category,
             limit: parseInt(event.limit),
@@ -24,5 +22,23 @@ function getPostsByCategory(event, context, callback) {
     });
 }
 exports.getPostsByCategory = getPostsByCategory;
+;
+function createPost(event, context, callback) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const createPostInput = {
+            caption: event.body.caption,
+            category: event.body.category,
+            created: new Date().getTime(),
+            createdBy: event.body.createdBy,
+            imageURL: event.body.imageURL,
+            isLiked: event.body.isLiked,
+            likeCount: 0,
+            usernameFilter: event.body.usernameFilter
+        };
+        yield postRepository_1.createPostHandler(createPostInput);
+        callback(null, 200);
+    });
+}
+exports.createPost = createPost;
 ;
 //# sourceMappingURL=post.js.map

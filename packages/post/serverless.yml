@@ -30,3 +30,4 @@ provider:
 
 functions:
   - ${file(config/get-posts-by-category.yml)}
+  - ${file(config/create-post.yml)}

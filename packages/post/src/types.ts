@@ -23,3 +23,14 @@ export interface GetPostsByCategoryInput {
     limit: number
     nextToken: string
 }
+
+export interface CreatePostInput {
+    caption: string
+    category: CategoryEnum
+    created: number
+    createdBy: User
+    imageURL: string
+    isLiked: boolean
+    likeCount: number
+    usernameFilter: string
+}
