@@ -1,0 +1,23 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "query" : {
+        ## Provide a query expression. **
+        "expression": "partitionKey = :partitionKey",
+        "expressionValues" : {
+            ":partitionKey" : {
+                "S" : "post"
+            }
+        }
+    },
+    "filter": {
+        "expression": "category=:category",
+        "expressionValues" : {
+            ":category": {
+                "S": "${ctx.args.input.category}"
+            }
+        }
+    },
+    "limit": $util.defaultIfNull($ctx.args.input.limit, 20),
+    "nextToken": $util.toJson($util.defaultIfNullOrBlank($ctx.args.input.nextToken, null))
+}

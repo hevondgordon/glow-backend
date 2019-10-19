@@ -1,0 +1,6 @@
+dataSources:
+  - type: AMAZON_DYNAMODB
+    name: Glow
+    config:
+      tableName: Glow
+      serviceRoleArn: { Fn::GetAtt: [AppSyncDynamoDbServiceRole, Arn] }

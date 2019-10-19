@@ -13,9 +13,15 @@ custom:
   accountId: 293458897566
   appSync:
     name: glow-app-${opt:stage, 'dev'}
-    serviceRole: "AppSyncServiceRole" 
+    serviceRole: "AppSyncServiceRole"
+    mappingTemplates: ${file(resources/mapping-templates.yml):mappingTemplates}
+    dataSources: ${file(resources/data-sources.yml):dataSources}
     userPoolConfig:
       awsRegion: 'us-east-1'
       defaultAction: ALLOW
       userPoolId: 'us-east-1_AHwkMYjFA'
     authenticationType: 'AMAZON_COGNITO_USER_POOLS'
+
+resources:
+  - ${file(resources/service-roles.yml)}
+  - ${file(resources/glow-table.yml)}

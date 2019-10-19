@@ -1,0 +1,22 @@
+#set(
+	$post = {
+      "created": $util.time.nowEpochMilliSeconds(),
+      "imageURL": $ctx.args.input.imageURL,
+      "caption": $ctx.args.input.caption,
+      "likeCount": $ctx.args.input.likeCount,
+      "isLiked": $ctx.args.input.isLiked,
+      "createdBy": $ctx.args.input.createdBy,
+      "category": $ctx.args.input.category,
+      "usernameFilter": $ctx.args.input.createdBy.username
+    }
+)
+{
+    "version" : "2017-02-28",
+    "operation" : "PutItem",
+    "key" : {
+        ## If object "id" should come from GraphQL arguments, change to $util.dynamodb.toDynamoDBJson($ctx.args.id)
+        "partitionKey": $util.dynamodb.toDynamoDBJson("post"),
+        "sortKey": $util.dynamodb.toDynamoDBJson($util.autoId()),
+    },
+    "attributeValues" : $util.dynamodb.toMapValuesJson($post)
+}

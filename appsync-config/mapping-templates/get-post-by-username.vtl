@@ -1,0 +1,22 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "query" : {
+        "expression": "partitionKey = :partitionKey",
+        "expressionValues" : {
+            ":partitionKey" : {
+                "S" : "post"
+            }
+        }
+    },
+    "filter": {
+        "expression": "usernameFilter=:usernameFilter",
+        "expressionValues" : {
+            ":usernameFilter": {
+                "S": "${ctx.args.input.usernameFilter}"
+            }
+        }
+    },
+    "limit": $util.defaultIfNull($ctx.args.input.limit, 20),
+    "nextToken": $util.toJson($util.defaultIfNullOrBlank($ctx.args.input.nextToken, null))
+}

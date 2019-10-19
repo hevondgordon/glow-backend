@@ -1,0 +1,12 @@
+getPostByCategory:
+      handler: lib/post.getPostsByCategory
+      description: gets posts by category
+      events:
+        - http:
+            path: getPostsByCategory
+            integration: lambda
+            method: get
+            cors: true
+            request:
+              template:
+                application/json: '{ "category" : "$input.params(''category'')", "token" : "$input.params(''token'')", "limit" : "$input.params(''limit'')" }'

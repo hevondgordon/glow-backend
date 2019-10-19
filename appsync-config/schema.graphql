@@ -1,0 +1,82 @@
+enum CategoryEnum {
+	Hair
+	Nails
+	MakeUp
+	BodyArt
+}
+
+type Appointment {
+	created: AWSTimestamp!
+	createdBy: User!
+	serviceProvider: User!
+	note: String!
+	time: AWSDateTime
+}
+
+type PaginatedPosts {
+	items: [Post]!
+	nextToken: String
+}
+
+type Post {
+	created: AWSTimestamp!
+	imageURL: AWSURL!
+	caption: String!
+	likeCount: Int!
+	isLiked: Boolean!
+	createdBy: User!
+	category: CategoryEnum!
+	usernameFilter: String
+}
+
+type Mutation {
+	createPost(input: createPostInput): Post
+}
+
+type Query {
+	getPost(input: getPostInput): [Post]
+	getPostByCategory(input: getPostsByCategoryInput): PaginatedPosts!
+	getPostsByUsername(input: getPostsByUsernameInput): PaginatedPosts!
+}
+
+type User {
+	fullName: String!
+	username: String!
+	address: String
+	phoneNumber: String
+}
+
+input createPostInput {
+	imageURL: AWSURL!
+	caption: String!
+	createdBy: userInput!
+	category: CategoryEnum!
+}
+
+input getPostInput {
+	postID: ID!
+}
+
+input getPostsByCategoryInput {
+	category: String!
+	limit: Int
+	nextToken: String
+}
+
+input getPostsByUsernameInput {
+	usernameFilter: String!
+	limit: Int
+	nextToken: String
+}
+
+input userInput {
+	fullName: String!
+	username: String!
+	address: String
+	phoneNumber: String
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}

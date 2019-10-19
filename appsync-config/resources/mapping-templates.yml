@@ -1,0 +1,18 @@
+mappingTemplates:
+  - dataSource: Glow
+    type: Mutation
+    field: createPost
+    request: create-post.vtl
+    response: default-response.vtl
+
+  - dataSource: Glow
+    type: Query
+    field: getPostByCategory
+    request: get-post-by-category.vtl
+    response: default-response.vtl
+
+  - dataSource: Glow
+    type: Query
+    field: getPostsByUsername
+    request: get-post-by-username.vtl
+    response: default-response.vtl
