@@ -10,4 +10,4 @@ createPost:
             request:
               passThrough: WHEN_NO_TEMPLATES
               template:
-                  {"application/json": "{\"body\":$input.json('$')}"}
+                  application/json: "{\"body\":$input.json('$')}"

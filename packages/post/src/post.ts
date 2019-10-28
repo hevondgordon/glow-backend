@@ -1,5 +1,6 @@
-import {getPostsByCategoryHandler,createPostHandler} from './postRepository';
+import {getPostsByCategoryHandler, createPostHandler} from './postRepository';
 import {GetPostsByCategoryInput, CreatePostInput} from './types';
+
 export async function getPostsByCategory(event, context, callback) {
   const getPostsByCategoryInput: GetPostsByCategoryInput = {
     category: event.category,
@@ -19,8 +20,8 @@ export async function createPost(event, context, callback) {
     imageURL: event.body.imageURL,
     isLiked: event.body.isLiked,
     likeCount: 0,
-    usernameFilter: event.body.usernameFilter
+    usernameFilter: event.body.usernameFilter,
   };
-  await createPostHandler(createPostInput)
-  callback(null, 200)
+  await createPostHandler(createPostInput);
+  callback(null, 200);
 };
