@@ -26,5 +26,7 @@ export async function getUserDetails(event, context, callback) {
     email: event.email,
   };
   const details = await getUserDetailsHandler(getUserDetailsInput);
-  callback(null, details);
+  let userDetails: object;
+  details.length > 0 ? userDetails = details[0]: {};
+  callback(null, userDetails);
 }

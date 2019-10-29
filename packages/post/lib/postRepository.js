@@ -10,12 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("utils");
-const uuidv1 = require('uuid/v1');
-const TABLE_NAME = 'Glow';
+const uuidv4 = require("uuid/v4");
 function getPostsByCategoryHandler(params) {
     return __awaiter(this, void 0, void 0, function* () {
         const queryWithFilterParams = {
-            TableName: TABLE_NAME,
+            TableName: utils_1.TABLE_NAME,
             KeyConditionExpression: 'partitionKey = :post',
             ExpressionAttributeValues: {
                 ':post': 'post',
@@ -32,7 +31,7 @@ exports.getPostsByCategoryHandler = getPostsByCategoryHandler;
 function createPostHandler(params) {
     return __awaiter(this, void 0, void 0, function* () {
         const createItemParams = {
-            TableName: TABLE_NAME,
+            TableName: utils_1.TABLE_NAME,
             Item: {
                 caption: params.caption,
                 category: params.category,
@@ -42,9 +41,9 @@ function createPostHandler(params) {
                 isLiked: params.isLiked,
                 likeCount: params.likeCount,
                 usernameFilter: params.usernameFilter,
-                partitionKey: "post",
-                sortKey: uuidv1()
-            }
+                partitionKey: 'post',
+                sortKey: uuidv4(),
+            },
         };
         yield utils_1.createItem(createItemParams);
     });

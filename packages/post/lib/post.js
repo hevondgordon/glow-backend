@@ -33,7 +33,7 @@ function createPost(event, context, callback) {
             imageURL: event.body.imageURL,
             isLiked: event.body.isLiked,
             likeCount: 0,
-            usernameFilter: event.body.usernameFilter
+            usernameFilter: event.body.usernameFilter,
         };
         yield postRepository_1.createPostHandler(createPostInput);
         callback(null, 200);

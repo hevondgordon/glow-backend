@@ -23,5 +23,8 @@
   },
   "bugs": {
     "url": "https://github.com/hevondgordon/glow-backend/issues"
+  },
+  "dependencies": {
+    "utils": "^1.0.0"
   }
 }
