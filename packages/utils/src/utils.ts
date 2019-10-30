@@ -40,6 +40,7 @@ export async function queryWithFilter(query: QueryWithFilterParams):
   });
 };
 
+
 export async function createItem(query: CreateItemParams) {
   const params = {
     TableName: query.TableName,
