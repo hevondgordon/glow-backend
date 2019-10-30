@@ -10,3 +10,8 @@ export interface CreateItemParams {
     TableName: string;
     Item: object;
 }
+export interface GetItemParams {
+    TableName: string;
+    KeyConditionExpression: string;
+    ExpressionAttributeValues: object;
+}

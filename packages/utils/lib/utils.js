@@ -13,6 +13,24 @@ const DynamoDB = require("aws-sdk/clients/dynamodb");
 const DocumentClient = new DynamoDB.DocumentClient({
     region: process.env.REGION,
 });
+function getItem(query) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const params = {
+            TableName: query.TableName,
+            KeyConditionExpression: query.KeyConditionExpression,
+            ExpressionAttributeValues: query.ExpressionAttributeValues,
+        };
+        return new Promise((resolve, reject) => {
+            DocumentClient.query(params, function (err, data) {
+                if (err)
+                    reject(err);
+                else
+                    resolve(data.Items);
+            });
+        });
+    });
+}
+exports.getItem = getItem;
 function queryWithFilter(query) {
     return __awaiter(this, void 0, void 0, function* () {
         const params = {
@@ -35,7 +53,7 @@ function createItem(query) {
     return __awaiter(this, void 0, void 0, function* () {
         const params = {
             TableName: query.TableName,
-            Item: query.Item
+            Item: query.Item,
         };
         return new Promise((resolve, reject) => {
             DocumentClient.put(params, (err, data) => {
