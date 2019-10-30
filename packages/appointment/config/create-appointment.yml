@@ -1,0 +1,12 @@
+getAppointments:
+      handler: lib/appointment.createAppointment
+      description: create appointment
+      events:
+        - http:
+            path: createAppointment
+            integration: lambda
+            method: post
+            cors: true
+            request:
+              template:
+                application/json: "{\"body\":$input.json('$')}"

@@ -1,5 +1,5 @@
 import {queryWithFilter, QueryWithFilterParams, CreateItemParams,
-  createItem, TABLE_NAME} from 'utils';
+  createItem, TABLE_NAME } from 'utils';
 import {GetPostsByCategoryInput, CreatePostInput} from './types';
 import * as uuidv4 from 'uuid/v4';
 
