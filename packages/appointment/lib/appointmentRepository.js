@@ -11,6 +11,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("utils");
 const uuidv4 = require("uuid/v4");
+function getAppointmentsByServiceProviderHandler(params) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const queryAppointmentsByServiceProviderParams = {
+            TableName: utils_1.TABLE_NAME,
+            KeyConditionExpression: 'partitionKey = :appointment',
+            ExpressionAttributeValues: {
+                ':appointment': 'appointment',
+                ':serviceProvider': params.serviceProvider,
+            },
+            FilterExpression: ':serviceProvider = serviceProvider',
+            Limit: params.limit,
+        };
+        const serviceProviderFilterAppointments = yield utils_1.queryWithFilter(queryAppointmentsByServiceProviderParams);
+        return serviceProviderFilterAppointments;
+    });
+}
+exports.getAppointmentsByServiceProviderHandler = getAppointmentsByServiceProviderHandler;
+function getAppointmentsByClientHandler(params) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const queryAppointmentsByClientParams = {
+            TableName: utils_1.TABLE_NAME,
+            KeyConditionExpression: 'partitionKey = :appointment',
+            ExpressionAttributeValues: {
+                ':appointment': 'appointment',
+                ':client': params.client,
+            },
+            FilterExpression: ':client = client',
+            Limit: params.limit,
+        };
+        const clientFilterAppointments = yield utils_1.queryWithFilter(queryAppointmentsByClientParams);
+        return clientFilterAppointments;
+    });
+}
+exports.getAppointmentsByClientHandler = getAppointmentsByClientHandler;
 function getAppointmentsHandler(params) {
     return __awaiter(this, void 0, void 0, function* () {
         const getAppointmentParams = {
@@ -18,7 +52,7 @@ function getAppointmentsHandler(params) {
             KeyConditionExpression: 'partitionKey = :appointment and sortKey = :email',
             ExpressionAttributeValues: {
                 ':appointment': 'appointment',
-                ':email': params.email
+                sortKey: uuidv4(),
             }
         };
         const appointments = yield utils_1.getItem(getAppointmentParams);

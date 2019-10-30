@@ -10,6 +10,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const appointmentRepository_1 = require("./appointmentRepository");
+function getAppointmentsByClient(event, context, callback) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const getAppointmentsByClientInput = {
+            client: event.client,
+            limit: parseInt(event.limit),
+            nextToken: null
+        };
+        const clientFilterAppointments = yield appointmentRepository_1.getAppointmentsByClientHandler(getAppointmentsByClientInput);
+        return clientFilterAppointments;
+    });
+}
+exports.getAppointmentsByClient = getAppointmentsByClient;
+function getAppointmentsByServiceProvider(event, context, callback) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const getAppointmentsByServiceProviderInput = {
+            serviceProvider: event.serviceProvider,
+            limit: parseInt(event.limit),
+            nextToken: null
+        };
+        const serviceProviderFilterAppointments = yield appointmentRepository_1.getAppointmentsByServiceProviderHandler(getAppointmentsByServiceProviderInput);
+        return serviceProviderFilterAppointments;
+    });
+}
+exports.getAppointmentsByServiceProvider = getAppointmentsByServiceProvider;
 function getAppointments(event, context, callback) {
     return __awaiter(this, void 0, void 0, function* () {
         const getAppointmentsInput = {

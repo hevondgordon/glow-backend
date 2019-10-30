@@ -1,0 +1,12 @@
+getAppointmentsByClient:
+      handler: lib/appointment.getAppointmentsByServiceProvider
+      description: get appointment by service provider
+      events:
+        - http:
+            path: getAppointmentsByServiceProvider
+            integration: lambda
+            method: get
+            cors: true
+            request:
+              template:
+                application/json: '{ "serviceProvider" : "$input.params(''serviceProvider'')", "token" : "$input.params(''token'')", "limit" : "$input.params(''limit'')" }'

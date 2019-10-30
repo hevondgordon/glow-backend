@@ -31,4 +31,6 @@ provider:
 functions:
   - ${file(config/get-appointments.yml)}
   - ${file(config/create-appointment.yml)}
+  - ${file(config/get-appointments-by-client.yml)}
+  - ${file(config/get-appointments-by-service-provider.yml)}
   
