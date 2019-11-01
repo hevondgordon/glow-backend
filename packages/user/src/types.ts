@@ -1,8 +1,9 @@
 export interface User {
     address: string
-    fullName: string
+    firstName: string
+    lastName
     phoneNumber: string
-    username: string
+    email: string
 }
 
 export interface UpdateProfileDetailsInput {
@@ -19,6 +20,6 @@ export interface UpdateProfileDetailsInput {
     accountType: string
 }
 
-export interface GetProfileDetailsInput {
+export interface GetUserDetailsInput {
     email: string
 }

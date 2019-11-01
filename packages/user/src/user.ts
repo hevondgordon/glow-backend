@@ -1,4 +1,4 @@
-import {UpdateProfileDetailsInput, GetProfileDetailsInput} from './types';
+import {UpdateProfileDetailsInput, GetUserDetailsInput} from './types';
 import {
   updateProfileDetailsHandler, getUserDetailsHandler,
 } from './userRepository';
@@ -22,7 +22,7 @@ export async function updateUserDetails(event, context, callback) {
 }
 
 export async function getUserDetails(event, context, callback) {
-  const getUserDetailsInput: GetProfileDetailsInput = {
+  const getUserDetailsInput: GetUserDetailsInput = {
     email: event.email,
   };
   const details = await getUserDetailsHandler(getUserDetailsInput);
