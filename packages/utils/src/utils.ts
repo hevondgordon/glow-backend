@@ -51,3 +51,26 @@ export async function createItem(query: CreateItemParams) {
     });
   });
 }
+
+export function getFormattedDate() {
+  const today = new Date();
+  const day = String(today.getDate());
+  const month = today.getMonth() + 1;
+  const year = String(today.getFullYear());
+
+  const formattedDate = day + ' ' + getMonth(month) + ' ' + year;
+  return formattedDate;
+}
+
+function getMonth(month: number) {
+  const months = {
+    1: 'January', 8: 'August',
+    2: 'February', 9: 'September',
+    3: 'March', 10: 'October',
+    4: 'April', 11: 'November',
+    5: 'May', 12: 'December',
+    6: 'June',
+    7: 'July',
+  };
+  return months[month];
+}

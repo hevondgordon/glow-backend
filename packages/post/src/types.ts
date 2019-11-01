@@ -27,10 +27,14 @@ export interface GetPostsByCategoryInput {
 export interface CreatePostInput {
     caption: string
     category: CategoryEnum
-    created: number
+    created: string
     createdBy: User
     imageURL: string
     isLiked: boolean
     likeCount: number
     usernameFilter: string
+}
+
+export interface GetPostByUserInput {
+    email: string
 }
