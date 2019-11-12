@@ -32,9 +32,10 @@ export async function createPost(event, context, callback) {
   const createPostInput: CreatePostInput = {
     caption: event.body.caption,
     category: event.body.category,
+    type: event.body.type,
     created: getFormattedDate(),
     createdBy: user,
-    imageURL: event.body.imageURL,
+    URL: event.body.URL,
     isLiked: false,
     likeCount: 0,
     usernameFilter: event.body.email,
