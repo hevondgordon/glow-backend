@@ -1,4 +1,4 @@
-getAppointments:
+createAppointment:
       handler: lib/appointment.createAppointment
       description: create appointment
       events:

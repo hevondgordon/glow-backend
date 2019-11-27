@@ -13,6 +13,23 @@ const DynamoDB = require("aws-sdk/clients/dynamodb");
 const DocumentClient = new DynamoDB.DocumentClient({
     region: process.env.REGION,
 });
+function deleteItem(query) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const params = {
+            TableName: query.TableName,
+            Key: query.Key,
+        };
+        return new Promise((resolve, reject) => {
+            DocumentClient.delete(params, function (err, data) {
+                if (err)
+                    console.log(err);
+                else
+                    console.log(data);
+            });
+        });
+    });
+}
+exports.deleteItem = deleteItem;
 function getItem(query) {
     return __awaiter(this, void 0, void 0, function* () {
         const params = {

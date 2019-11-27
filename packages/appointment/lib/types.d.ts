@@ -19,3 +19,12 @@ export interface CreateAppointmentInput {
 export interface GetAppointmentsInput {
     email: string;
 }
+export interface DeleteAppointmentInput {
+    sortKey: string;
+}
+export interface UpdateAppointmentInput {
+    serviceProvider: User;
+    time: number;
+    date: Date;
+    comment: string;
+}

@@ -1,6 +1,34 @@
-import {getItem, GetItemParams, CreateItemParams, createItem, TABLE_NAME, QueryWithFilterParams, queryWithFilter} from 'utils';
-import {GetAppointmentsInput, CreateAppointmentInput, GetAppointmentsByClientInput, GetAppointmentsByServiceProviderInput} from './types';
+import {getItem, GetItemParams, CreateItemParams, createItem, TABLE_NAME, QueryWithFilterParams, 
+queryWithFilter, deleteItem, DeleteItemParams} from 'utils';
+import {GetAppointmentsInput, CreateAppointmentInput, GetAppointmentsByClientInput, 
+GetAppointmentsByServiceProviderInput, DeleteAppointmentInput, UpdateAppointmentInput} from './types';
 import * as uuidv4 from 'uuid/v4';
+
+export async function updateAppointmentsHandler(params:
+    UpdateAppointmentInput) {
+    const appointmentKey = {
+        partitionKey: 'appointment',
+        //please revisit
+        sortKey: uuidv4(),
+        }
+        //code should go here
+    }
+
+
+
+export async function deleteAppointmentsHandler(params: 
+    DeleteAppointmentInput) {
+    const DeleteAppointmentParams : DeleteItemParams = {
+            TableName: TABLE_NAME,
+            Key: {
+                ':appointment': 'appointment',
+                //please revisit
+                ':sortKey': params.sortKey,
+            },
+        };
+    await deleteItem(DeleteAppointmentParams);
+    }
+
 
 export async function getAppointmentsByServiceProviderHandler(params: 
     GetAppointmentsByServiceProviderInput) {

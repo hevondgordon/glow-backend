@@ -11,6 +11,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("utils");
 const uuidv4 = require("uuid/v4");
+function updateAppointmentsHandler(params) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const appointmentKey = {
+            partitionKey: 'appointment',
+            sortKey: uuidv4(),
+        };
+    });
+}
+exports.updateAppointmentsHandler = updateAppointmentsHandler;
+function deleteAppointmentsHandler(params) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const DeleteAppointmentParams = {
+            TableName: utils_1.TABLE_NAME,
+            Key: {
+                ':appointment': 'appointment',
+                ':sortKey': params.sortKey,
+            },
+        };
+        yield utils_1.deleteItem(DeleteAppointmentParams);
+    });
+}
+exports.deleteAppointmentsHandler = deleteAppointmentsHandler;
 function getAppointmentsByServiceProviderHandler(params) {
     return __awaiter(this, void 0, void 0, function* () {
         const queryAppointmentsByServiceProviderParams = {

@@ -1,4 +1,4 @@
-getAppointmentsByClient:
+getAppointmentsByServiceProvider:
       handler: lib/appointment.getAppointmentsByServiceProvider
       description: get appointment by service provider
       events:

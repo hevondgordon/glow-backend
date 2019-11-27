@@ -34,3 +34,7 @@ export interface CreatePostInput {
     likeCount: number
     usernameFilter: string
 }
+
+export interface UpdatePostByCaptionInput {
+    caption: string
+}

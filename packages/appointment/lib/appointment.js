@@ -10,6 +10,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const appointmentRepository_1 = require("./appointmentRepository");
+function updateAppointment(event, context, callback) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const updateAppointmentInput = {
+            serviceProvider: event.body.serviceProvider,
+            time: event.body.time,
+            date: event.body.date,
+            comment: event.body.comment
+        };
+        yield appointmentRepository_1.updateAppointmentsHandler(updateAppointmentInput);
+    });
+}
+exports.updateAppointment = updateAppointment;
+function deleteAppointment(event, context, callback) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const deleteAppointmentInput = {
+            sortKey: event.body.sortKey
+        };
+        yield appointmentRepository_1.deleteAppointmentsHandler(deleteAppointmentInput);
+    });
+}
+exports.deleteAppointment = deleteAppointment;
 function getAppointmentsByClient(event, context, callback) {
     return __awaiter(this, void 0, void 0, function* () {
         const getAppointmentsByClientInput = {

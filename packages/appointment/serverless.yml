@@ -1,4 +1,4 @@
-service: post
+service: appointment
 
 package:
   exclude:
