@@ -20,7 +20,7 @@ type PaginatedPosts {
 
 type Post {
 	created: AWSTimestamp!
-	imageURL: AWSURL!
+	URL: AWSURL!
 	caption: String!
 	likeCount: Int!
 	isLiked: Boolean!
@@ -47,7 +47,7 @@ type User {
 }
 
 input createPostInput {
-	imageURL: AWSURL!
+	URL: AWSURL!
 	caption: String!
 	createdBy: userInput!
 	category: CategoryEnum!
