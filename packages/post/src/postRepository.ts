@@ -2,12 +2,10 @@ import {queryWithFilter, QueryWithFilterParams, CreateItemParams,
   createItem, TABLE_NAME, updateItem, UpdateItemParams} from 'utils';
 import {GetPostsByCategoryInput, CreatePostInput,
   GetPostByUserInput, LikedPostInput, GetPostByBusinessInput} from './types';
-  GetPostByUserInput} from './types';
 
 import * as uuidv4 from 'uuid/v4';
 
 import DynamoDB = require('aws-sdk/clients/dynamodb')
-import { stringify } from 'querystring';
 const DocumentClient = new DynamoDB.DocumentClient({
   region: process.env.REGION,
 });

@@ -4,8 +4,6 @@ const DocumentClient = new DynamoDB.DocumentClient({
   region: process.env.REGION,
 });
 
-import {TABLE_NAME} from './constants';
-
 import {QueryWithFilterParams, CreateItemParams, GetItemParams,
   DeleteItemParams, UpdateItemParams} from './types';
 
