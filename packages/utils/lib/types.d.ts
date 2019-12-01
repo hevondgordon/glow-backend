@@ -15,3 +15,4 @@ export interface GetItemParams {
     KeyConditionExpression: string;
     ExpressionAttributeValues: object;
 }
+

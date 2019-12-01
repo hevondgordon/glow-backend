@@ -17,3 +17,10 @@ export interface GetItemParams {
    KeyConditionExpression: string,
    ExpressionAttributeValues: object
 }
+
+export interface DeleteItemParams {
+   TableName: string
+   Key: object,
+}
+
+

@@ -1,7 +1,7 @@
 export interface User {
     address: string
     firstName: string
-    lastName
+    lastName: string
     phoneNumber: string
     email: string
 }

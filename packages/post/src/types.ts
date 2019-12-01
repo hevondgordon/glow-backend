@@ -36,6 +36,10 @@ export interface CreatePostInput {
     usernameFilter: string
 }
 
+
+export interface UpdatePostByCaptionInput {
+    caption: string
+}
 export interface GetPostByUserInput {
     email: string
 }

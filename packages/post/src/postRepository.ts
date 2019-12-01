@@ -2,6 +2,7 @@ import {queryWithFilter, QueryWithFilterParams, CreateItemParams,
   createItem, TABLE_NAME} from 'utils';
 import {GetPostsByCategoryInput, CreatePostInput,
   GetPostByUserInput} from './types';
+
 import * as uuidv4 from 'uuid/v4';
 
 export async function getPostByUserHandler(params: GetPostByUserInput) {

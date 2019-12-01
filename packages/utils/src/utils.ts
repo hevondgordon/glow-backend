@@ -6,7 +6,22 @@ const DocumentClient = new DynamoDB.DocumentClient({
 
 import {TABLE_NAME} from './constants';
 
-import {QueryWithFilterParams, CreateItemParams, GetItemParams} from './types';
+import {QueryWithFilterParams, CreateItemParams, GetItemParams, DeleteItemParams} from './types';
+
+export async function deleteItem(query: DeleteItemParams):
+Promise<any[]> {
+  const params: DeleteItemParams = {
+    TableName: query.TableName,
+    Key: query.Key,
+  };
+  return new Promise((resolve, reject) => {
+    DocumentClient.delete(params, function(err, data) {
+      if (err) console.log(err);
+      else console.log(data)
+    });
+  });
+}
+
 
 export async function getItem(query: GetItemParams):
   Promise<any[]> {
