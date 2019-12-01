@@ -1,0 +1,9 @@
+getServices:
+  handler: lib/services.getServices
+  description: get services
+  events:
+    - http:
+        path: getServices
+        integration: lambda
+        method: get
+        cors: true

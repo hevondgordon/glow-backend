@@ -1,0 +1,27 @@
+{
+  "name": "post",
+  "version": "0.0.1",
+  "description": "> TODO: description",
+  "author": "Hevon Gordon <hevongordon@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/post.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "compile": "tsc",
+    "deploy": "lerna run compile --scope=post && sls deploy --aws-profile personal"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.538.0",
+    "user": "^0.0.1",
+    "utils": "^1.0.0",
+    "uuid": "^3.3.3"
+  }
+}

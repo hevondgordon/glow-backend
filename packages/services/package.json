@@ -1,0 +1,30 @@
+{
+  "name": "services",
+  "version": "0.0.1",
+  "description": "contains services logic",
+  "author": "Hevon Gordon <hgordon@qualityworkscg.com>",
+  "homepage": "https://github.com/hevondgordon/glow-backend#readme",
+  "license": "ISC",
+  "main": "lib/services.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hevondgordon/glow-backend.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "compile": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/hevondgordon/glow-backend/issues"
+  },
+  "dependencies": {
+    "utils": "^1.0.0"
+  }
+}

@@ -1,0 +1,30 @@
+service: services
+
+package:
+  exclude:
+    - src/**
+    - tsconfig.json
+    - __tests__/**
+    - README.md
+    - events
+provider:
+  name: aws
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+        - dynamodb:Query
+        - dynamodb:GetItem
+      Resource: 
+        - "arn:aws:dynamodb:${opt:region, 'us-east-1'}:293458897566:table/Glow"
+  runtime: nodejs10.x
+  environment:
+    REGION: ${opt:region, 'us-east-1'}
+    STAGE: ${opt:stage, 'dev'}
+  memorySize: 512
+  timeout: 6
+  region: ${opt:region, 'us-east-1'}
+
+functions:
+  - ${file(config/get-services.yml)}

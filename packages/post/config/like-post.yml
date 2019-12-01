@@ -1,0 +1,13 @@
+likePost:
+      handler: lib/post.likePost
+      description: allow users to like post
+      events:
+        - http:
+            path: likePost
+            integration: lambda
+            method: post
+            cors: true
+            request:
+              passThrough: WHEN_NO_TEMPLATES
+              template:
+                  application/json: "{\"body\":$input.json('$')}"

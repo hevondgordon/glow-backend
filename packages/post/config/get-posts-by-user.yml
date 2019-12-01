@@ -1,0 +1,12 @@
+getPostByUser:
+  handler: lib/post.getPostByUser
+  description: gets posts by user
+  events:
+    - http:
+        path: getPostByUser
+        integration: lambda
+        method: get
+        cors: true
+        request:
+          template:
+            application/json: '{ "email" : "$input.params(''email'')"}'

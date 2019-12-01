@@ -1,0 +1,26 @@
+{
+  "name": "triggers",
+  "version": "0.0.1",
+  "description": "event trigger functions are kept in this package",
+  "author": "Hevon Gordon <hgordon@qualityworkscg.com>",
+  "homepage": "https://github.com/hevondgordon/glow-backend#readme",
+  "license": "ISC",
+  "main": "lib/triggers.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hevondgordon/glow-backend.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/hevondgordon/glow-backend/issues"
+  }
+}

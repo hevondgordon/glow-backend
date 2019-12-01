@@ -1,0 +1,12 @@
+getUserDetails:
+      handler: lib/user.getUserDetails
+      description: get user details
+      events:
+        - http:
+            path: getUserDetails
+            integration: lambda
+            method: get
+            cors: true
+            request:
+              template:
+                application/json: '{ "email" : "$input.params(''email'')" }'

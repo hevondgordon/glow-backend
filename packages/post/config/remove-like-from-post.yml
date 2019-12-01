@@ -1,0 +1,13 @@
+removeLikeFromPost:
+      handler: lib/post.removeLikeFromPost
+      description: allow users to remove like from post
+      events:
+        - http:
+            path: removeLikeFromPost
+            integration: lambda
+            method: post
+            cors: true
+            request:
+              passThrough: WHEN_NO_TEMPLATES
+              template:
+                  application/json: "{\"body\":$input.json('$')}"

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Page</title>
+  
+<style>
+
+  div{
+    height: 100%;
+  }
+  form{
+    text-align: 50%;
+  }
+  .container{
+    width: 50%;
+  }
+  
+  .left{
+    position: absolute;
+    left: 0px;
+    width: 50%;
+    background-color: green;
+    /*transform: translateX(20vw);*/
+    /*display: inline-block;*/
+  }
+  .right{
+    text-align: center;
+    position: absolute;
+    right: 0px;
+    width: 50%;
+    background-color: yellow;
+  }
+  .centered{
+    margin-left: 35%;
+   }
+</style>
+</head>
+<body>
+  
+  <section class="container">
+    
+  <div class = "left">
+  <form class="centered" onsubmit="welcomefunction()"> 
+    First Name:<br>
+    <input type= "text" name = "firstname">
+    <br><br>
+    Last Name:<br>
+    <input type = "text" name = "lastname">
+    <br><br>
+    <input type = "submit" value = "Submit" id="test">
+    </form>
+  </div>
+  
+  <div class = "right">
+    <p id = "message">Welcome to my page</p>
+  </div>
+    
+  </section>
+  
+<script>
+  function welcomefunction(){
+  event.preventDefault();
+    console.log(first)
+  console.log("second")
+  var first = document.getElementsByName("firstname").value;
+  
+  var last = document.getElementsByName("lastname").value;
+  var newmessage = document.getElementsByID("message") + first + last;
+  document.getElementByID("message").innerHTML = newmessage;  
+  }
+  document.getElementById("test").addEventListener("click", welcomefunction);
+  
+</script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+getPostByBusiness:
+      handler: lib/post.getPostsByBusiness
+      description: gets posts by Business
+      events:
+        - http:
+            path: getPostsByBusiness
+            integration: lambda
+            method: get
+            cors: true
+            request:
+              template:
+                application/json: '{ "businessName" : "$input.params(''businessName'')" }'

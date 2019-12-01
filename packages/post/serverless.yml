@@ -1,0 +1,45 @@
+service: post
+
+package:
+  exclude:
+    - src/**
+    - tsconfig.json
+    - __tests__/**
+    - README.md
+    - events
+
+provider:
+  name: aws
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+        - dynamodb:Query
+        - dynamodb:GetItem
+      Resource: 
+        - "arn:aws:dynamodb:${opt:region, 'us-east-1'}:293458897566:table/Glow"
+    - Effect: "Allow"
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource: 
+        - "arn:aws:lambda:us-east-1:293458897566:function:post-dev-createPost"
+        - "arn:aws:lambda:us-east-1:293458897566:function:post-dev-getPostByCategory"
+
+  runtime: nodejs10.x
+  environment:
+    REGION: ${opt:region, 'us-east-1'}
+    STAGE: ${opt:stage, 'dev'}
+  memorySize: 512
+  timeout: 6
+  region: ${opt:region, 'us-east-1'}
+
+functions:
+  - ${file(config/get-posts-by-category.yml)}
+  - ${file(config/create-post.yml)}
+  - ${file(config/get-posts-by-user.yml)}
+  - ${file(config/like-post.yml)}
+  - ${file(config/remove-like-from-post.yml)}
+  - ${file(config/get-post-by-business.yml)}
