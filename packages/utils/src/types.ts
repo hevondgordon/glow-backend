@@ -28,3 +28,9 @@ export interface UpdateItemParams {
    DynamoDB.DocumentClient.ExpressionAttributeNameMap,
    ExpressionAttributeValues: object
 }
+export interface DeleteItemParams {
+   TableName: string
+   Key: object,
+}
+
+

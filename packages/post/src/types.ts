@@ -42,6 +42,10 @@ export interface CreatePostInput {
     businessName: string
 }
 
+
+export interface UpdatePostByCaptionInput {
+    caption: string
+}
 export interface GetPostByUserInput {
     email: string
 }

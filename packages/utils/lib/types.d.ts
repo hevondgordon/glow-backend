@@ -24,3 +24,4 @@ export interface UpdateItemParams {
     ExpressionAttributeNames?: DynamoDB.DocumentClient.ExpressionAttributeNameMap;
     ExpressionAttributeValues: object;
 }
+

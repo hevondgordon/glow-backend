@@ -1,0 +1,12 @@
+getAppointments:
+      handler: lib/appointment.getAppointments
+      description: gets appointment by email
+      events:
+        - http:
+            path: getAppointments
+            integration: lambda
+            method: get
+            cors: true
+            request:
+              template:
+                application/json: '{ "email" : "$input.params(''email'')" }'
