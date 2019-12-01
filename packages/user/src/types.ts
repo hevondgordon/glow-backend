@@ -3,7 +3,7 @@ export interface User {
     firstName: string
     lastName: string
     phoneNumber: string
-    username: string
+    email: string
 }
 
 export interface UpdateProfileDetailsInput {
@@ -20,6 +20,6 @@ export interface UpdateProfileDetailsInput {
     accountType: string
 }
 
-export interface GetProfileDetailsInput {
+export interface GetUserDetailsInput {
     email: string
 }

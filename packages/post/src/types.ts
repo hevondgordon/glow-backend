@@ -5,7 +5,7 @@ export interface Post {
     category: CategoryEnum
     created: number
     createdBy: User
-    imageURL: string
+    URL: string
     isLiked: boolean
     likeCount: number
     usernameFilter: string
@@ -27,14 +27,19 @@ export interface GetPostsByCategoryInput {
 export interface CreatePostInput {
     caption: string
     category: CategoryEnum
-    created: number
+    created: string
     createdBy: User
-    imageURL: string
+    type: string
+    URL: string
     isLiked: boolean
     likeCount: number
     usernameFilter: string
 }
 
+
 export interface UpdatePostByCaptionInput {
     caption: string
+}
+export interface GetPostByUserInput {
+    email: string
 }

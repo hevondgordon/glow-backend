@@ -1,10 +1,10 @@
-import {UpdateProfileDetailsInput, GetProfileDetailsInput} from './types';
+import {UpdateProfileDetailsInput, GetUserDetailsInput} from './types';
 import {
   CreateItemParams, TABLE_NAME,
   ACCOUNT_TYPE_BUSINESS, ACCOUNT_TYPE_PERSONAL, createItem,
   GetItemParams, getItem} from 'utils';
 
-export async function getUserDetailsHandler(params: GetProfileDetailsInput) {
+export async function getUserDetailsHandler(params: GetUserDetailsInput) {
   const getItemParams: GetItemParams = {
     TableName: TABLE_NAME,
     KeyConditionExpression: 'partitionKey = :partitionKey and sortKey = :email',

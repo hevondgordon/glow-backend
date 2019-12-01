@@ -37,7 +37,7 @@ function getUserDetails(event, context, callback) {
             email: event.email,
         };
         const details = yield userRepository_1.getUserDetailsHandler(getUserDetailsInput);
-        callback(null, details);
+
     });
 }
 exports.getUserDetails = getUserDetails;
