@@ -26,6 +26,7 @@
     "url": "https://github.com/hevondgordon/glow-backend/issues"
   },
   "dependencies": {
-    "utils": "^1.0.0"
+    "utils": "^1.0.0",
+    "uuidv4": "^6.0.0"
   }
 }

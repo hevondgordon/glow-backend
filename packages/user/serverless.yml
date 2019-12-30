@@ -38,3 +38,4 @@ provider:
 functions:
   - ${file(config/update-user-details.yml)}
   - ${file(config/get-user-details.yml)}
+  - ${file(config/update-opening-hours.yml)}

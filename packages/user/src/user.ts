@@ -1,7 +1,26 @@
-import {UpdateProfileDetailsInput, GetUserDetailsInput} from './types';
+import {UpdateProfileDetailsInput, GetUserDetailsInput,
+  OpeningHoursInput} from './types';
+
 import {
   updateProfileDetailsHandler, getUserDetailsHandler,
+  updateOpeningHoursHandler,
 } from './userRepository';
+
+async function handleResponse(callback, handler, input) {
+  let status = {};
+  try {
+    await handler(input);
+    status = {'status': 200};
+  } catch (error) {
+    console.log(error);
+    status = {
+      'status': 500,
+      'error': error,
+    };
+  }
+  callback(null, status);
+}
+
 export async function updateUserDetails(event, context, callback) {
   console.log(JSON.stringify(event));
   const profileDetails: UpdateProfileDetailsInput = {
@@ -35,4 +54,15 @@ export async function getUserDetails(event, context, callback) {
   }
   console.log(JSON.stringify(userDetails));
   callback(null, userDetails);
+}
+
+export async function updateOpeningHours(event, context, callback) {
+  const openingHoursInput: OpeningHoursInput = {
+    openFromHours: event.body.openFromHours,
+    openFromMins: event.body.openFromMins,
+    openToHours: event.body.openToHours,
+    openToMins: event.body.openToMins,
+    email: event.body.email,
+  };
+  await handleResponse(callback, updateOpeningHoursHandler, openingHoursInput);
 }
