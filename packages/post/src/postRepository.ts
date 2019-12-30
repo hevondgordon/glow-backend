@@ -34,7 +34,7 @@ export async function getPostByBusinessHandler(params: GetPostByBusinessInput) {
       ':post': 'post',
       ':businessName': params.businessName,
     },
-    FilterExpression: 'businessName = :businessName',
+    FilterExpression: 'contains(businessName, :businessName)',
     Limit: 10,
   };
 
@@ -56,6 +56,7 @@ export async function getPostsByCategoryHandler(params:
   };
 
   const posts = await queryWithFilter(queryWithFilterParams);
+  posts.sort((a, b) => b.timestamp - a.timestamp);
   return posts;
 }
 
@@ -76,6 +77,7 @@ export async function createPostHandler(params:
       businessName: params.businessName,
       partitionKey: 'post',
       sortKey: uuidv4(),
+      timestamp: Date.now(),
     },
   };
   try {

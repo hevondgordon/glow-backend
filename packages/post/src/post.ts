@@ -59,13 +59,18 @@ export async function createPost(event, context, callback) {
     email: event.body.email,
   };
   const details = (await getUserDetailsHandler(getUserDetailsInput))[0];
+
   const user: User = {
-    address: details['address'],
+    address: details['businessAddress'],
     firstName: details['firstName'],
     lastName: details['lastName'],
     phoneNumber: details['personalPhoneNumber'],
     email: details['sortKey'],
   };
+
+  if (details['profileImage']) {
+    user['profileImage'] = details['profileImage'];
+  }
 
   if (details['businessName'] !== undefined) {
     user['businessName'] = details['businessName'];
