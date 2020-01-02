@@ -1,0 +1,13 @@
+updateServiceInterval:
+  handler: lib/settings.updateServiceInterval
+  description: update service interval
+  events:
+    - http:
+        path: updateServiceInterval
+        integration: lambda
+        method: post
+        cors: true
+        request:
+          passThrough: WHEN_NO_TEMPLATES
+          template:
+              application/json: "{\"body\":$input.json('$')}"

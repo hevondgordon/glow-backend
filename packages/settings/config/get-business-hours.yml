@@ -1,0 +1,13 @@
+getBusinessHours:
+  handler: lib/settings.getBusinessHours
+  description: fetch service intervals
+  events:
+    - http:
+        path: getBusinessHours
+        integration: lambda
+        method: get
+        cors: true
+        request:
+          passThrough: WHEN_NO_TEMPLATES
+          template:
+              application/json: '{ "email" : "$input.params(''email'')" }'
