@@ -10,7 +10,45 @@ const DocumentClient = new DynamoDB.DocumentClient({
   region: process.env.REGION,
 });
 
-import * as uuidv4 from 'uuid/v4';
+function createUserDetailsObject(params) {
+  const details = {
+    UpdateExpression:
+    'set ',
+    ExpressionAttributeNames: {
+    },
+    ExpressionAttributeValues: {
+    },
+  };
+  // eslint-disable-next-line guard-for-in
+  for (const property in params) {
+    if (property != 'email') {
+      console.log(`${property}: ${params[property]}`);
+      details.UpdateExpression += `#${property} = :${property}, `;
+      details.ExpressionAttributeNames[`#${property}`] = `${property}`;
+      details.ExpressionAttributeValues[`:${property}`] = params[property];
+    }
+  }
+
+  details['UpdateExpression'] = details['UpdateExpression'].substring(
+      0, details['UpdateExpression'].length - 2
+  );
+  console.log('CHAOS'+JSON.stringify(details));
+  return details;
+}
+
+export async function updateUserDetailsHandler(params) {
+  const userDetails = createUserDetailsObject(params);
+  const udateItemParams: UpdateItemParams = {
+    TableName: TABLE_NAME,
+    Key: {'partitionKey': 'profile', 'sortKey': params.email},
+    UpdateExpression: userDetails['UpdateExpression'],
+    ConditionExpression: null,
+    ExpressionAttributeNames: userDetails['ExpressionAttributeNames'],
+    ExpressionAttributeValues: userDetails['ExpressionAttributeValues'],
+  };
+  console.log(JSON.stringify(udateItemParams));
+  return (await updateItem(udateItemParams));
+}
 
 export async function getUserDetailsHandler(params: GetUserDetailsInput) {
   const getItemParams: GetItemParams = {
@@ -22,6 +60,9 @@ export async function getUserDetailsHandler(params: GetUserDetailsInput) {
     },
   };
   const details = await getItem(getItemParams);
+  details['username'] = details['sortKey'];
+  delete details['sortKey'];
+  delete details['partitionKey'];
   return details;
 }
 
@@ -30,7 +71,7 @@ export async function updateOpeningHoursHandler(params: OpeningHoursInput) {
     TableName: TABLE_NAME,
     Key: {'partitionKey': 'business-hours', 'sortKey': params.email},
     UpdateExpression:
-    'set #openFromHours = :openFromHours,#openFromMins = :openFromMins, #openToHours = :openToHours, #openToMins = :openToMins',
+    'set c,#openFromMins = :openFromMins, #openToHours = :openToHours, #openToMins = :openToMins',
     ConditionExpression: null,
     ExpressionAttributeNames: {
       '#openFromHours': 'openFromHours',
@@ -48,7 +89,7 @@ export async function updateOpeningHoursHandler(params: OpeningHoursInput) {
   return (await updateItem(udateItemParams));
 }
 
-export async function updateProfileDetailsHandler(
+export async function addProfileDetailsHandler(
     params: UpdateProfileDetailsInput) {
   const itemKeys = {
     partitionKey: 'profile',

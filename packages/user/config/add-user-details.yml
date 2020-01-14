@@ -1,0 +1,13 @@
+addUserDetails:
+      handler: lib/user.addUserDetails
+      description: update user details
+      events:
+        - http:
+            path: addUserDetails
+            integration: lambda
+            method: post
+            cors: true
+            request:
+              passThrough: WHEN_NO_TEMPLATES
+              template:
+                  application/json: "{\"body\":$input.json('$')}"

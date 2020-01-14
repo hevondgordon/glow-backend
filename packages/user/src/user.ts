@@ -2,8 +2,8 @@ import {UpdateProfileDetailsInput, GetUserDetailsInput,
   OpeningHoursInput} from './types';
 
 import {
-  updateProfileDetailsHandler, getUserDetailsHandler,
-  updateOpeningHoursHandler,
+  addProfileDetailsHandler, getUserDetailsHandler,
+  updateOpeningHoursHandler, updateUserDetailsHandler,
 } from './userRepository';
 
 async function handleResponse(callback, handler, input) {
@@ -21,7 +21,7 @@ async function handleResponse(callback, handler, input) {
   callback(null, status);
 }
 
-export async function updateUserDetails(event, context, callback) {
+export async function addUserDetails(event, context, callback) {
   console.log(JSON.stringify(event));
   const profileDetails: UpdateProfileDetailsInput = {
     profileImage: event.body.profileImage,
@@ -39,8 +39,20 @@ export async function updateUserDetails(event, context, callback) {
   if (event.body.selectedServices !== undefined) {
     profileDetails['selectedServices'] = event.body.selectedServices;
   }
-  await updateProfileDetailsHandler(profileDetails);
+  await addProfileDetailsHandler(profileDetails);
   callback(null, {'status': 200});
+}
+
+export async function updateUserDetails(event, context, callback) {
+  let status = {};
+  try {
+    await updateUserDetailsHandler(event.body);
+    status = {'status': 200};
+  } catch {
+    status = {'status': 500};
+  }
+  console.log(status);
+  callback(null, status);
 }
 
 export async function getUserDetails(event, context, callback) {
