@@ -1,0 +1,12 @@
+makeDateAvailable:
+      handler: lib/appointment.makeDateAvailable
+      description: make date that was previously unavailable, available for booking appointments
+      events:
+        - http:
+            path: makeDateAvailable
+            integration: lambda
+            method: post
+            cors: true
+            request:
+              template:
+                application/json: "{\"body\":$input.json('$')}"

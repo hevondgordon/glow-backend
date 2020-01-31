@@ -10,7 +10,9 @@ const DocumentClient = new DynamoDB.DocumentClient({
   region: process.env.REGION,
 });
 
-function createUserDetailsObject(params) {
+import * as uuidv4 from 'uuid/v4';
+
+async function createUserDetailsObject(params) {
   const details = {
     UpdateExpression:
     'set ',
@@ -32,12 +34,22 @@ function createUserDetailsObject(params) {
   details['UpdateExpression'] = details['UpdateExpression'].substring(
       0, details['UpdateExpression'].length - 2
   );
-  console.log('CHAOS'+JSON.stringify(details));
+
+  const getUserDetailsInput: GetUserDetailsInput = {
+    email: params['email'],
+  };
+
+  const userDetails = await getUserDetailsHandler(getUserDetailsInput);
+
+  details['UpdateExpression'] += ' ,#personalId = :personalId';
+  details.ExpressionAttributeNames['#personalId'] = 'personalId';
+  details.ExpressionAttributeValues[':personalId'] = uuidv4();
+
   return details;
 }
 
 export async function updateUserDetailsHandler(params) {
-  const userDetails = createUserDetailsObject(params);
+  const userDetails = await createUserDetailsObject(params);
   const udateItemParams: UpdateItemParams = {
     TableName: TABLE_NAME,
     Key: {'partitionKey': 'profile', 'sortKey': params.email},
@@ -71,7 +83,7 @@ export async function updateOpeningHoursHandler(params: OpeningHoursInput) {
     TableName: TABLE_NAME,
     Key: {'partitionKey': 'business-hours', 'sortKey': params.email},
     UpdateExpression:
-    'set c,#openFromMins = :openFromMins, #openToHours = :openToHours, #openToMins = :openToMins',
+    'set #openFromMins = :openFromMins, #openFromHours = :openFromHours, #openToHours = :openToHours, #openToMins = :openToMins',
     ConditionExpression: null,
     ExpressionAttributeNames: {
       '#openFromHours': 'openFromHours',
@@ -86,6 +98,7 @@ export async function updateOpeningHoursHandler(params: OpeningHoursInput) {
       ':openToMins': params.openToMins,
     },
   };
+  console.log(JSON.stringify(udateItemParams));
   return (await updateItem(udateItemParams));
 }
 

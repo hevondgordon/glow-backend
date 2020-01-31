@@ -23,6 +23,7 @@ export async function getPostByUserHandler(params: GetPostByUserInput) {
   };
 
   const posts = await queryWithFilter(queryWithFilterParams);
+  posts.sort((a, b) => b.timestamp - a.timestamp);
   return posts;
 }
 
@@ -32,13 +33,14 @@ export async function getPostByBusinessHandler(params: GetPostByBusinessInput) {
     KeyConditionExpression: 'partitionKey = :post',
     ExpressionAttributeValues: {
       ':post': 'post',
-      ':businessName': params.businessName,
+      ':businessName': params.businessName.toLowerCase(),
     },
     FilterExpression: 'contains(businessName, :businessName)',
     Limit: 10,
   };
 
   const posts = await queryWithFilter(queryWithFilterParams);
+  posts.sort((a, b) => b.timestamp - a.timestamp);
   return posts;
 }
 
@@ -65,7 +67,6 @@ export async function createPostHandler(params:
   const createItemParams: CreateItemParams = {
     TableName: TABLE_NAME,
     Item: {
-      caption: params.caption,
       category: params.category,
       created: params.created,
       type: params.type,
@@ -74,12 +75,15 @@ export async function createPostHandler(params:
       isLiked: params.isLiked,
       likeCount: params.likeCount,
       usernameFilter: params.usernameFilter,
-      businessName: params.businessName,
+      businessName: params.businessName.toLowerCase(),
       partitionKey: 'post',
       sortKey: uuidv4(),
       timestamp: Date.now(),
     },
   };
+  if (params.caption != '') {
+    createItemParams.Item['caption'] = params.caption;
+  }
   try {
     await createItem(createItemParams);
   } catch (error) {

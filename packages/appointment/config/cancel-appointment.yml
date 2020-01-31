@@ -1,0 +1,12 @@
+cancelAppointment:
+      handler: lib/appointment.cancelAppointment
+      description: cancel appointment
+      events:
+        - http:
+            path: cancelAppointment
+            integration: lambda
+            method: post
+            cors: true
+            request:
+              template:
+                application/json: "{\"body\":$input.json('$')}"

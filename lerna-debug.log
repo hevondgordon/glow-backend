@@ -1,14 +1,9 @@
-0 silly argv { _: [ 'create' ],
+0 silly argv { _: [ 'run' ],
 0 silly argv   lernaVersion: '3.16.4',
-0 silly argv   '$0': 'lerna',
-0 silly argv   name: 'appointment' }
+0 silly argv   '$0': '/usr/local/bin/lerna',
+0 silly argv   script: 'compile' }
 1 notice cli v3.16.4
-2 verbose rootPath /Users/kadainewilliams/Documents/glow-backend
-3 error Error: Command failed: git config --get user.email
-3 error
-3 error
-3 error     at makeError (/Users/kadainewilliams/Documents/glow-backend/node_modules/execa/index.js:174:9)
-3 error     at Function.module.exports.sync (/Users/kadainewilliams/Documents/glow-backend/node_modules/execa/index.js:338:15)
-3 error     at Object.execSync (/Users/kadainewilliams/Documents/glow-backend/node_modules/@lerna/child-process/index.js:26:16)
-3 error     at CreateCommand.gitConfig (/Users/kadainewilliams/Documents/glow-backend/node_modules/@lerna/create/index.js:181:34)
-3 error     at CreateCommand.initialize (/Users/kadainewilliams/Documents/glow-backend/node_modules/@lerna/create/index.js:107:47)
+2 verbose rootPath /Users/hevonqw/Documents/glow-backend
+3 error JSONError: Unexpected token } in JSON at position 804 while parsing near '...usboy": "^0.3.1",  }}' in packages/utils/package.json
+3 error     at module.exports (/Users/hevonqw/Documents/glow-backend/node_modules/parse-json/index.js:26:19)
+3 error     at parse (/Users/hevonqw/Documents/glow-backend/node_modules/load-json-file/index.js:15:9)

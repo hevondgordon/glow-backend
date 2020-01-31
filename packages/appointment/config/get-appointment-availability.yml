@@ -1,0 +1,12 @@
+getAppointmentAvailability:
+      handler: lib/appointment.getAppointmentAvailability
+      description: gets dates that have been altered by service provider
+      events:
+        - http:
+            path: getAppointmentAvailability
+            integration: lambda
+            method: get
+            cors: true
+            request:
+              template:
+                application/json: '{ "email" : "$input.params(''email'')" }'

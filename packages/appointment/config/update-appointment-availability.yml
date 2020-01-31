@@ -1,0 +1,12 @@
+updateAppointmentAvailability:
+      handler: lib/appointment.updateAppointmentAvailability
+      description: update appointment availability
+      events:
+        - http:
+            path: updateAppointmentAvailability
+            integration: lambda
+            method: post
+            cors: true
+            request:
+              template:
+                application/json: "{\"body\":$input.json('$')}"

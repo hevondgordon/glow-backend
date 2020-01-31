@@ -1,0 +1,12 @@
+updateAppointment:
+      handler: lib/appointment.updateAppointment
+      description: update appointment
+      events:
+        - http:
+            path: updateAppointment
+            integration: lambda
+            method: post
+            cors: true
+            request:
+              template:
+                application/json: "{\"body\":$input.json('$')}"

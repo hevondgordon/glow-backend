@@ -17,6 +17,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:Query
         - dynamodb:GetItem
+        - dynamodb:DeleteItem
+        - dynamodb:BatchWriteItem
       Resource: 
         - "arn:aws:dynamodb:${opt:region, 'us-east-1'}:293458897566:table/Glow"
 
@@ -30,7 +32,13 @@ provider:
 
 functions:
   - ${file(config/get-appointments.yml)}
+  - ${file(config/cancel-appointment.yml)}
   - ${file(config/create-appointment.yml)}
   - ${file(config/get-appointments-by-client.yml)}
   - ${file(config/get-appointments-by-service-provider.yml)}
+  - ${file(config/update-appointment-availability.yml)}
+  - ${file(config/get-appointment-availability.yml)}
+  - ${file(config/make-date-available.yml)}
+  - ${file(config/update-appointment.yml)}
+
   

@@ -1,26 +1,25 @@
-
 import DynamoDB = require('aws-sdk/clients/dynamodb')
 const DocumentClient = new DynamoDB.DocumentClient({
   region: process.env.REGION,
 });
 
-import {QueryWithFilterParams, CreateItemParams, GetItemParams,
-  DeleteItemParams, UpdateItemParams} from './types';
 
-export async function deleteItem(query: DeleteItemParams):
-Promise<any[]> {
+import {QueryWithFilterParams, CreateItemParams, GetItemParams,
+  DeleteItemParams, UpdateItemParams, BatchWriteParams, BatchWriteItems,
+} from './types';
+
+export async function deleteItem(query: DeleteItemParams) {
   const params: DeleteItemParams = {
     TableName: query.TableName,
     Key: query.Key,
   };
   return new Promise((resolve, reject) => {
     DocumentClient.delete(params, function(err, data) {
-      if (err) console.log(err);
-      else console.log(data);
+      if (err) reject(err);
+      else resolve(data);
     });
   });
 }
-
 
 export async function getItem(query: GetItemParams):
   Promise<any[]> {
@@ -54,6 +53,19 @@ export async function queryWithFilter(query: QueryWithFilterParams):
   });
 };
 
+export async function batchWriteItems(query: BatchWriteItems) {
+  const params = {
+    RequestItems: {},
+  };
+  params.RequestItems[query.TableName.toString()] = [];
+  params.RequestItems[query.TableName.toString()] = query.Items;
+  return new Promise((resolve, reject) => {
+    DocumentClient.batchWrite(params, function(err, data) {
+      if (err) reject(err);
+      else resolve(data);
+    });
+  });
+}
 
 export async function createItem(query: CreateItemParams) {
   const params = {

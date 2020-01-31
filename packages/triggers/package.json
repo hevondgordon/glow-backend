@@ -18,9 +18,21 @@
     "url": "git+https://github.com/hevondgordon/glow-backend.git"
   },
   "scripts": {
+    "compile": "tsc",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/hevondgordon/glow-backend/issues"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
+    "async": "^3.1.0",
+    "aws-sdk": "^2.598.0",
+    "ffmpeg": "0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "gm": "^1.23.1"
+  },
+  "devDependencies": {
+    "util": "^0.12.1"
   }
 }

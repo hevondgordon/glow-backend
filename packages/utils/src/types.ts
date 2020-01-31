@@ -33,4 +33,13 @@ export interface DeleteItemParams {
    Key: object,
 }
 
+export interface BatchWriteParams {
+   RequestItems: object
+}
+
+export interface BatchWriteItems {
+   TableName: string
+   Items: any[]
+}
+
 
