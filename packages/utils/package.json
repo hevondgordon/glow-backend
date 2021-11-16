@@ -26,7 +26,7 @@
     "url": "https://github.com/hevondgordon/glow-backend/issues"
   },
   "dependencies": {
-    "aws-sdk": "^2.538.0",
+    "aws-sdk": "^2.814.0",
     "busboy": "^0.3.1"
   }
 }
